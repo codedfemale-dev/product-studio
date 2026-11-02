@@ -45,6 +45,6 @@ function makeSeed(today=localDate(new Date())) {
  ev(9,'14:00','Backlog refinement',45,'Prepare options for the next Sprint.','Inspect discovery findings.\nReorder the backlog.\nDiscuss uncertainty and dependencies.','Product Owner and relevant team members');
  ev(11,'13:00','Sprint review',45,'Inspect the outcome with stakeholders and adapt what comes next.','Revisit the goal.\nExplore working product and outcome evidence.\nHear stakeholder feedback.\nAdapt the backlog together.','Scrum Team and relevant stakeholders');
  ev(11,'14:15','Sprint retrospective',45,'Find one practical improvement to quality and effectiveness.','Check how people experienced the Sprint.\nInspect interactions, tools and working practices.\nChoose one improvement with an owner.\nAgree how to check it next Sprint.','Scrum Team');
- return {version:1,settings:{name:'Mentor Match',tagline:'Make finding and booking a mentor feel straightforward.',goal:'Help learners book a suitable mentor with confidence.',sprintGoal:'Make the first booking clear, accessible and reassuring.',start,end:dateOffset(start,11),scene:'dunes'},items,outcomes,records,events};
+ return {version:1,settings:{name:'Mentor Match',tagline:'Make finding and booking a mentor feel straightforward.',goal:'Help learners book a suitable mentor with confidence.',sprintGoal:'Make the first booking clear, accessible and reassuring.',start,end:dateOffset(start,11),scene:'coast'},items,outcomes,records,events};
 }
 if(typeof module!=='undefined')module.exports={makeSeed,localDate,dateOffset,STAGES,HORIZONS,KINDS};

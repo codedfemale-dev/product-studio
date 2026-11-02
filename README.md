@@ -18,6 +18,10 @@ The calendar starts with a two-week example, including ten Daily Scrums, Sprint 
 
 All sample names, research and figures are illustrative. This is an educational example, not a claim about a real team. Meeting purposes were checked against the [Scrum Guide](https://scrumguides.org/scrum-guide.html); the team’s optional practices, estimates, priorities and meeting durations are examples to adapt. The roles include a Product Owner, Scrum Master and cross-functional Developers.
 
+## Visual palette
+
+Coastal slate uses deep navy (`#233642`), mist blue (`#DCE7EA`), soft white (`#F8FAFA`) and warm brass (`#C49A61`). The default scene is coast, with translucent sections and locally served Playfair Display and Open Sans. Existing saved boards and background choices remain available. Priority and blocker colours retain distinct labels and colours.
+
 ## Your personal copy
 
 Changes are saved in **localStorage in your current browser**, using the `codedfemale-product-studio-v1` key. Each visitor gets their own independent workspace. There is no account, backend, shared editing, analytics, notification service or calendar connection. The hosting provider handles normal web requests; the application does not transmit board content.
