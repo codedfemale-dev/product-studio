@@ -18,6 +18,10 @@ function makeSeed(today=localDate(new Date())) {
  ['P-109','Explore group mentoring','Understand whether a group format solves a meaningful learner problem.','Could','Backlog','Jo','','Interview learners about their current alternatives.\nSummarise evidence and decide whether to proceed.','Support repeat learning',''],
  ['P-110','Clear cancellation guidance','As a learner, I want to understand cancellation before committing.','Should','Backlog','Maya','2','Policy visible before confirmation.\nPlain language checked with learners.\nCancellation route works on mobile.','Help learners book with confidence','']
  ].map((a,i)=>({id:a[0],title:a[1],description:a[2],priority:a[3],status:a[4],owner:a[5],points:a[6],acceptance:a[7],outcome:a[8],blocker:a[9],sprint:i<5,due:dateOffset(start,i<5?10:18+i)}));
+ items.find(i=>i.id==='P-101').sprint=false;items.find(i=>i.id==='P-101').status='Backlog';
+ items.find(i=>i.id==='P-105').outcome='Help learners book with confidence';
+ items.find(i=>i.id==='P-110').sprint=true;items.find(i=>i.id==='P-110').status='Ready';
+ const order=['P-102','P-103','P-104','P-105','P-110','P-107','P-101','P-106','P-108','P-109'];items.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
  const outcomes=[
  {id:'O-1',title:'Help learners book with confidence',horizon:'Now',owner:'Maya',measure:'Increase booking completion from an example baseline of 45% to a target of 60%.',evidence:'Interview notes suggest time-zone ambiguity and unclear confirmation cause hesitation.',next:'Ship and observe a clearer booking flow; review completion and support queries.',confidence:'Medium'},
  {id:'O-2',title:'Help learners find a suitable mentor',horizon:'Next',owner:'Jo',measure:'At least 4 of 5 usability participants find a relevant mentor without help.',evidence:'Learners describe skills and availability as the first things they look for.',next:'Test filter prototypes before widening the build.',confidence:'Medium'},
@@ -32,7 +36,7 @@ function makeSeed(today=localDate(new Date())) {
  ['Decision','Keep the first release focused','Decision: prioritise a clear booking journey over saved mentors. Rationale: stronger evidence of immediate booking friction. Revisit after the first release review.','Maya','Agreed'],
  ['Agreement','Protect focus and ask early','Keep at most two items in progress across this example team. Raise blockers early. Pair to finish work before starting more. Adjust this limit together when capacity changes.','Team','Agreed'],
  ['Agreement','What Done means','Acceptance criteria met; peer review complete; relevant tests pass; keyboard and screen reader checks complete; no known critical defects; documentation and monitoring updated as needed. A separate release decision may still be required.','Team','Agreed'],
- ['Agreement','Ready for a planning conversation','Understand the user problem, desired outcome and acceptance examples. Surface dependencies and split oversized work. This is a conversation aid, not an official Scrum commitment.','Team','Agreed'],
+ ['Agreement','Ready for a planning conversation','Understand the user problem, desired outcome and acceptance examples. Surface dependencies and split oversized work. This is a conversation aid, not an official Scrum commitment. Keep estimates with the people doing the work and discuss uncertainty openly.','Team','Agreed'],
  ['Agreement','Roles and availability','Maya: Product Owner, accountable for value and backlog ordering. Erin: Scrum Master, supporting effectiveness and removing impediments. Jo, Alex and Sam: Developers, bringing design, research, engineering and testing skills. Example capacity: plan around leave and support work; estimates are not productivity targets.','Team','Agreed'],
  ['Retrospective','Try smaller review batches','Observation: reviews have waited until the end of the Sprint. Experiment: offer a short review slot each afternoon. Owner: Alex. Review at the next retrospective using waiting time and team feedback.','Alex','Trying']
  ].map((r,i)=>({id:'E-'+(i+1),kind:r[0],title:r[1],description:r[2],owner:r[3],status:r[4]}));
@@ -45,6 +49,28 @@ function makeSeed(today=localDate(new Date())) {
  ev(9,'14:00','Backlog refinement',45,'Prepare options for the next Sprint.','Inspect discovery findings.\nReorder the backlog.\nDiscuss uncertainty and dependencies.','Product Owner and relevant team members');
  ev(11,'13:00','Sprint review',45,'Inspect the outcome with stakeholders and adapt what comes next.','Revisit the goal.\nExplore working product and outcome evidence.\nHear stakeholder feedback.\nAdapt the backlog together.','Scrum Team and relevant stakeholders');
  ev(11,'14:15','Sprint retrospective',45,'Find one practical improvement to quality and effectiveness.','Check how people experienced the Sprint.\nInspect interactions, tools and working practices.\nChoose one improvement with an owner.\nAgree how to check it next Sprint.','Scrum Team');
- return {version:1,settings:{name:'Mentor Match',tagline:'Make finding and booking a mentor feel straightforward.',goal:'Help learners book a suitable mentor with confidence.',sprintGoal:'Make the first booking clear, accessible and reassuring.',start,end:dateOffset(start,11),scene:'coast'},items,outcomes,records,events};
+ const workspace={version:1,settings:{name:'Mentor Match',tagline:'Make finding and booking a mentor feel straightforward.',goal:'Help learners book a suitable mentor with confidence.',sprintGoal:'Make the first booking clear, accessible and reassuring.',start,end:dateOffset(start,11),scene:'coast'},items,outcomes,records,events};return seedTeamTools(workspace);
 }
+function seedTeamTools(s){
+ s.toolsVersion=1;
+ s.items.push({id:'P-111',title:'Verify the end-to-end booking flow',description:'Check that the time-zone display and confirmation work together before considering a wider release.',priority:'Must',status:'Backlog',owner:'Sam',points:'3',acceptance:'A learner can complete a booking with a clear time zone and confirmation.\nRelevant mobile, keyboard and failure scenarios are checked.\nRecord quality evidence and unresolved issues.',outcome:'Help learners book with confidence',blocker:'',sprint:false,due:'',dependencies:['P-102','P-103']});
+ const order=['P-102','P-103','P-104','P-105','P-110','P-111','P-107','P-101','P-106','P-108','P-109'];s.items.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
+ const steps={
+ 'P-102':['Show the learner’s time zone beside each slot','Check cross-zone and clock-change examples','Complete review and relevant accessibility checks'],
+ 'P-103':['Verify one confirmation per booking','Check failure and duplicate-send behaviour','Review content and accessibility'],
+ 'P-104':['Record a keyboard walkthrough','Record relevant screen-reader checks','Complete peer review'],
+ 'P-110':['Confirm the current cancellation wording','Check guidance before confirmation on mobile and keyboard','Review acceptance examples and quality evidence'],
+ 'P-111':['Verify prerequisite work meets Done','Run the relevant end-to-end booking examples','Record findings and agree any release follow-up']};
+ for(const i of s.items){i.workType=['P-106','P-109'].includes(i.id)?'Research':['P-107','P-111'].includes(i.id)?'Task':'Story';i.dependencies=i.dependencies||[];i.checklist=(steps[i.id]||['Clarify the need and acceptance examples','Carry out the agreed work and relevant checks','Review quality evidence with the team']).map((text,n)=>({id:'C-'+i.id+'-'+(n+1),text,done:i.status==='Done'||(i.id==='P-102'&&n===0)||(i.id==='P-103'&&n<2)}))}
+ s.feedback=[
+ {id:'F-1',title:'Learners hesitate over session times',source:'Example moderated interviews with five learners',date:s.settings.start,url:'',observation:'Three of five participants paused to check which time zone a session used.',interpretation:'Time-zone ambiguity may contribute to booking hesitation.',uncertainty:'A small qualitative sample does not establish how common the issue is. Test clearer labels and inspect further evidence.',owner:'Jo',status:'Reviewing',workIds:['P-102']},
+ {id:'F-2',title:'Confirmation needs to feel reassuring',source:'Example support notes',date:s.settings.start,url:'',observation:'Learners asked whether their booking had completed after choosing a slot.',interpretation:'The confirmation may not clearly communicate the booking result.',uncertainty:'Check the current flow and tracking before assuming an email alone will solve the problem.',owner:'Sam',status:'Linked',workIds:['P-103']},
+ {id:'F-3',title:'A stakeholder requests saved mentors',source:'Example stakeholder conversation',date:s.settings.start,url:'',observation:'A stakeholder suggested saving favourite mentors for a possible partner demonstration.',interpretation:'Returning learners might benefit, but the need is not yet established.',uncertainty:'Validate learner behaviour and the demonstration timing before changing the booking plan.',owner:'Maya',status:'New',workIds:['P-108']}
+ ];
+ const ratings={'P-102':[5,5,4,2],'P-103':[4,5,4,2],'P-105':[3,4,3,2],'P-110':[3,5,3,1],'P-111':[4,5,4,3],'P-107':[3,5,3,2],'P-101':[5,1,3,3],'P-106':[3,2,3,2],'P-108':[4,1,1,4],'P-109':[3,1,1,4]};
+ s.prioritisation={weights:{impact:3,alignment:2},ratings:{},reason:'',owner:'Maya'};
+ for(const [id,r]of Object.entries(ratings))s.prioritisation.ratings[id]={impact:r[0],alignment:r[1],confidence:r[2],effort:r[3],evidence:id==='P-108'||id==='P-109'?'Illustrative assumption: demand remains unvalidated. Lower confidence until further discovery.':'Illustrative assumption for this learning example. Inspect the linked outcome, feedback and uncertainty before using the rating.'};
+ return s;
+}
+
 if(typeof module!=='undefined')module.exports={makeSeed,localDate,dateOffset,STAGES,HORIZONS,KINDS};
