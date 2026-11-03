@@ -1,6 +1,6 @@
 BUILD YOUR OWN PROJECT PLANNER WITH AI
 
-Use these prompts in sequence, checking each change before continuing. Prompts 11 to 14 cover optional extensions beyond the demo.
+Use the foundation prompts first, then add one feature at a time. Calendar, templates, fast views and reuse/recovery are implemented in the reviewed demo. Completion-date automation and shared access remain optional extensions.
 
 01-PROJECT-BRIEF
 
@@ -18,7 +18,7 @@ Write a one-page brief covering user needs, the main user journey, what is in sc
 
 Design a responsive project planner for the brief we agreed.
 
-Include an overview, a task board, a list view, search, owner and priority filters, and a task editor.
+Include an overview, a task board, a table view, search, owner and priority filters, and a task editor.
 Use white, warm background #FAF8F4, headings #191919, text #333333 and restrained gold accents #CA9B52. Use existing project fonts and branding where available.
 Keep longer text left aligned. Make section headings distinct from task titles. Do not rely on colour alone to communicate priority or overdue work.
 Describe desktop and mobile layouts, empty states, validation messages, keyboard navigation and visible focus. Show a wireframe before implementation.
@@ -29,7 +29,7 @@ Implement the agreed first version using HTML, CSS and vanilla JavaScript. Use n
 
 Create index.html, style.css and app.js. Split reusable validation and calculations into a separate module if helpful. Explain each file and how to run the project using a local static server.
 
-Use one consistent task collection for the board, list and overview. Give each task a stable unique ID, title, description, owner label, due date, priority, status, checklist, blocked flag and blocker reason.
+Use one consistent task collection for the board, table and overview. Give each task a stable unique ID, title, description, owner label, due date, priority, status, checklist, blocked flag and blocker reason.
 
 Start with six fictional website launch tasks. Save changes in localStorage. If saving fails, keep the session usable and show a clear backup warning. If saved data cannot be read, do not silently overwrite it. Render user-entered content as text.
 
@@ -39,7 +39,7 @@ Implement real interactions. Clearly identify anything outside this version's sc
 
 Add a task editor with create, edit and delete actions. Require a non-blank title, limit text lengths and give errors beside the form. Owner names are descriptive labels, not accounts.
 
-Keep task IDs stable when editing. Ask before deletion. Support closing the editor with Escape and restore keyboard focus appropriately. Saving an edit must update the board, list and overview without duplicating the task.
+Keep task IDs stable when editing. Ask before deletion. Support closing the editor with Escape and restore keyboard focus appropriately. Saving an edit must update the board, table and overview without duplicating the task.
 
 05-BOARD
 
@@ -108,6 +108,22 @@ Review this working personal planner and propose a phased extension plan for:
 For each feature, describe the user benefit, data changes, acceptance criteria and whether it needs a server, scheduler, database or external service. Explain recurring costs and maintenance responsibilities where relevant, without inventing prices.
 
 For shared access, enforce permissions on the server, test that users cannot read or edit another project's data, and keep secrets out of browser code. Do not implement until I have chosen the next feature.
+
+16-FAST-VIEWS
+
+Add labels to tasks, with up to eight labels per task and 30 characters per label. Include labels in search and add a label filter. Combine it with the existing filters.
+
+Add quick filters for All tasks, Unfinished, Due today, Next 7 days, Overdue and Blocked. Next 7 days includes today and the following six days; exclude completed tasks from date and blocker quick filters. Add sorting by due date, priority and task name without changing the saved task order. Put undated tasks last when sorting by date. Keep keyboard focus after a quick filter redraws.
+
+Add a semantic table view with editable status controls. Support dragging cards between board columns while retaining the labelled status selector for touch and keyboard. Accept older backups without labels.
+
+17-REUSE-AND-RECOVER
+
+Add task duplication with a fresh ID, copied descriptive details and labels, To do status, unticked checklist items and no blocker. Make it clear that owner and due date are retained for review.
+
+Add session-only undo for up to 20 task changes, including edits, duplication, checklist changes, imports, resets and templates. Keep a snapshot before each successful change. Invalid or cancelled changes must not enter undo history. Undo history may clear on refresh; explain that clearly.
+
+Add CSV export of all tasks for spreadsheet use, with escaped quotes, headers and protection against formula-like cell content. Keep JSON backup as the restore format. Test labels surviving refresh and backup restore, duplication, undo after a template, and CSV contents.
 
 15-TEST-AND-REVIEW
 

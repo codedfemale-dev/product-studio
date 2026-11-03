@@ -16,13 +16,15 @@ Open http://localhost:8000 in your browser. No build, package installation or AP
 
 Create a task, change its status, tick a checklist item and refresh. Try owner and priority filters together. Export a backup, change a task, then import the backup to restore it. Import replaces all current tasks after confirmation.
 
-Features: board and list views, task creation/editing/deletion, owner labels, due dates, priorities, combined search and filters, checklists, blockers, live overview calculations, local saving and validated JSON backup/restore. Use the task title to open the editor. Use the status selector to move work with mouse, touch or keyboard.
+Features: board, table and calendar views, task creation/editing/deletion, owner labels, due dates, priorities, combined search and filters, labels, six quick filters, sorting, task duplication, three dated project templates, undo for the last 20 successful task changes during the session, CSV export, checklists, blockers, live overview calculations, local saving and validated JSON backup/restore. Use the task title to open the editor. Use the status selector to move work with mouse, touch or keyboard.
 
 The overview uses all tasks, regardless of filters. Completion means the percentage of tasks marked Done, not a measure of productivity or delivered value. Dates due today and completed tasks are excluded from overdue counts. Completed tasks are excluded from outstanding blocker counts.
 
 ## Build your own
 
-Read [PROMPTS.txt](PROMPTS.txt) for the brief, design prompt, foundation prompt, feature prompts, extension planning and verification prompt. These are reusable instructions for your own build; AI output will vary and needs review. The demo implements the core local features. Calendar, template, automation and shared-access prompts describe future work, not completed functionality.
+Read [PROMPTS.txt](PROMPTS.txt) for the brief, design prompt, foundation prompt, feature prompts, extension planning and verification prompt. These are reusable instructions for your own build; AI output will vary and needs review. The demo implements the core local features. Calendar and templates are implemented. Completion-date automation, shared access and external reminders remain future work.
+
+Duplication retains the owner and due date for review, but resets status, checklist completion and blockers. Templates can add to or replace the current tasks, use fresh IDs and leave owners blank. Undo includes template creation, imports and reset, but clears on refresh. CSV exports all tasks and is for spreadsheet use; use JSON for restoration. The table can scroll horizontally on narrow screens, and the calendar uses an agenda on mobile. Advanced filters collapse on mobile.
 
 ## Data and limits
 
