@@ -1,0 +1,136 @@
+BUILD YOUR OWN PROJECT PLANNER WITH AI
+
+Use the foundation prompts first, then add one feature at a time. Calendar, templates, fast views and reuse/recovery are implemented in the reviewed demo. Completion-date automation and shared access remain optional extensions.
+
+01-PROJECT-BRIEF
+
+Help me define a small project management tool before writing code.
+
+Users: three people coordinating a website launch.
+Problem: tasks, deadlines and blockers are scattered across notes.
+Main outcome: each person can see what to do next and what needs attention.
+First version: one project, tasks, owners, due dates, priorities, a board and a progress overview.
+Constraints: beginner-friendly, responsive and keyboard accessible. Use fictional data.
+
+Write a one-page brief covering user needs, the main user journey, what is in scope, what can wait and five observable acceptance criteria. Explain unfamiliar terms. Flag assumptions so I can check them.
+
+02-DESIGN
+
+Design a responsive project planner for the brief we agreed.
+
+Include an overview, a task board, a table view, search, owner and priority filters, and a task editor.
+Use white, warm background #FAF8F4, headings #191919, text #333333 and restrained gold accents #CA9B52. Use existing project fonts and branding where available.
+Keep longer text left aligned. Make section headings distinct from task titles. Do not rely on colour alone to communicate priority or overdue work.
+Describe desktop and mobile layouts, empty states, validation messages, keyboard navigation and visible focus. Show a wireframe before implementation.
+
+03-WORKING-FOUNDATION
+
+Implement the agreed first version using HTML, CSS and vanilla JavaScript. Use no framework, external service or paid API.
+
+Create index.html, style.css and app.js. Split reusable validation and calculations into a separate module if helpful. Explain each file and how to run the project using a local static server.
+
+Use one consistent task collection for the board, table and overview. Give each task a stable unique ID, title, description, owner label, due date, priority, status, checklist, blocked flag and blocker reason.
+
+Start with six fictional website launch tasks. Save changes in localStorage. If saving fails, keep the session usable and show a clear backup warning. If saved data cannot be read, do not silently overwrite it. Render user-entered content as text.
+
+Implement real interactions. Clearly identify anything outside this version's scope.
+
+04-TASKS
+
+Add a task editor with create, edit and delete actions. Require a non-blank title, limit text lengths and give errors beside the form. Owner names are descriptive labels, not accounts.
+
+Keep task IDs stable when editing. Ask before deletion. Support closing the editor with Escape and restore keyboard focus appropriately. Saving an edit must update the board, table and overview without duplicating the task.
+
+05-BOARD
+
+Create To do, In progress, In review and Done columns. Show a count for each column and give every card a labelled status selector that works with keyboard and touch.
+
+Moving a task must change its status in the existing task collection and save it. If you add drag and drop, retain the status selector as an alternative. Show a helpful message when the project or filtered results are empty.
+
+06-DATES
+
+Add optional due dates and High, Medium and Low priorities. Label an unfinished task Overdue only when its due date is before today in the user's local calendar. A task due today is not overdue. Done tasks are not overdue.
+
+Validate dates, display them in British English and do not use colour as the only signal. Verify yesterday, today, tomorrow, no due date and completed tasks.
+
+07-FILTERS
+
+Add case-insensitive search across task title, description and owner. Combine search with owner and priority filters so all selected conditions apply together.
+
+Show the number of matching tasks and a Clear filters button. Filtering must not delete or change tasks. Keep project overview totals based on the whole project and label that behaviour clearly.
+
+08-CHECKLISTS
+
+Add checklist items that can be ticked independently, plus a Blocked flag and a required blocker reason when flagged.
+
+Keep blocker information separate from workflow status so a task can be In progress and blocked. Count only unfinished blocked tasks in the overview. Preserve checklist completion when editing unrelated task details. Show labels alongside any visual indicators.
+
+09-OVERVIEW
+
+Add overview cards showing total tasks, completion percentage, overdue unfinished tasks and blocked unfinished tasks.
+
+Calculate completion as Done tasks divided by all tasks, rounded to a whole percentage. Show 0% for an empty project. Derive these figures from the task collection rather than hard-coding them. Do not describe task completion as a measure of customer value or individual productivity.
+
+10-BACKUPS
+
+Add JSON export and import. Export all task data into a downloadable backup. Validate file size, task count, unique IDs, allowed statuses, text lengths, checklist fields and dates before importing.
+
+Explain that import replaces the current project, ask before replacement and keep existing data unchanged when an import is invalid or cancelled. Add a reset action with confirmation. Explain that clearing browser data can remove local work.
+
+11-CALENDAR
+
+Add a monthly calendar using the existing task due dates. Include previous month, next month and Today controls, plus a readable agenda view. Clicking a task must open the existing editor.
+
+Do not duplicate tasks into separate calendar data. Keep undated tasks visible in an Undated section. Test month boundaries, leap years and a month with no dated tasks. Keep the agenda usable on mobile and with a keyboard.
+
+12-TEMPLATES
+
+Add a Website launch template that creates a new set of tasks only after confirmation. Generate fresh task and checklist IDs where applicable. Reset checklist completion, remove owner labels and let the user choose whether dates should be blank or calculated from a chosen start date.
+
+Explain whether the template adds to or replaces existing tasks before applying it. Test using the same template twice without duplicate IDs.
+
+13-AUTOMATION
+
+Add a local automation rule: when a task moves into Done, record its completion date. When it moves out of Done, clear that date. Let me turn the rule on or off and explain that it runs only while this app is open.
+
+Update validation and backups for the new field. Ensure the rule runs once per status transition. Test moving into Done, saving an unrelated edit, moving out of Done, and importing older backups without this field.
+
+14-NEXT-FEATURES
+
+Review this working personal planner and propose a phased extension plan for:
+1. A calendar with a readable agenda alternative.
+2. A timeline with start dates and dependencies, including missing dates and circular dependencies.
+3. Reusable project templates with fresh task IDs.
+4. Task comments and a reliable activity history.
+5. A simple automation rule and optional reminders.
+6. Shared projects with accounts and viewer/editor permissions.
+
+For each feature, describe the user benefit, data changes, acceptance criteria and whether it needs a server, scheduler, database or external service. Explain recurring costs and maintenance responsibilities where relevant, without inventing prices.
+
+For shared access, enforce permissions on the server, test that users cannot read or edit another project's data, and keep secrets out of browser code. Do not implement until I have chosen the next feature.
+
+16-FAST-VIEWS
+
+Add labels to tasks, with up to eight labels per task and 30 characters per label. Include labels in search and add a label filter. Combine it with the existing filters.
+
+Add quick filters for All tasks, Unfinished, Due today, Next 7 days, Overdue and Blocked. Next 7 days includes today and the following six days; exclude completed tasks from date and blocker quick filters. Add sorting by due date, priority and task name without changing the saved task order. Put undated tasks last when sorting by date. Keep keyboard focus after a quick filter redraws.
+
+Add a semantic table view with editable status controls. Support dragging cards between board columns while retaining the labelled status selector for touch and keyboard. Accept older backups without labels.
+
+17-REUSE-AND-RECOVER
+
+Add task duplication with a fresh ID, copied descriptive details and labels, To do status, unticked checklist items and no blocker. Make it clear that owner and due date are retained for review.
+
+Add session-only undo for up to 20 task changes, including edits, duplication, checklist changes, imports, resets and templates. Keep a snapshot before each successful change. Invalid or cancelled changes must not enter undo history. Undo history may clear on refresh; explain that clearly.
+
+Add CSV export of all tasks for spreadsheet use, with escaped quotes, headers and protection against formula-like cell content. Keep JSON backup as the restore format. Test labels surviving refresh and backup restore, duplication, undo after a template, and CSV contents.
+
+15-TEST-AND-REVIEW
+
+Review the implemented planner against the agreed brief. Run the checks you can actually perform and separate passed checks, failures and anything unverified.
+
+Check create, edit, delete and status changes; persistence after refresh; combined filters; empty projects; yesterday/today/tomorrow due dates; completed tasks; checklist saving; blocked task counts; and completion calculations.
+
+Test valid, malformed, duplicate-ID and oversized imports. Check cancelled import, reset confirmation, unavailable storage and unreadable saved data. Confirm user-entered HTML displays as text rather than running.
+
+Check keyboard access, focus visibility, form labels, dialog focus and mobile layout. Confirm every visible control works. Fix failures, then explain remaining limitations in plain English. Do not claim a check passed without evidence.
