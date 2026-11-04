@@ -102,7 +102,7 @@ In the repository, open **Settings → Pages**. Choose **Deploy from a branch**,
 - `practice.js`: self-review, reflections, annotated comparison, change-request illustration, handover planning and storage safeguards.
 - `team-tools.js`: feedback, prioritisation, work and meeting templates, prerequisite links, checklists and additive demo examples.
 - `refinements.js`: unfinished-form protection, priority explanations, meeting follow-up links and the connected workflow exercise.
-- `tests.cjs`: 67 checks covering validation, persistence, flow, recovery, calendar format, mode isolation, learning progression, history, Undo and learning notes.
+- `tests.cjs`: 72 checks covering validation, persistence, flow, recovery, calendar format, mode isolation, learning progression, history, Undo and learning notes.
 - `assets/`: locally served Playfair Display and Open Sans fonts with their licences.
 
 No framework, external script, remote font request or AI service is used. User content is escaped before HTML rendering. The app limits imports to 5 MB and 1,000 records per collection. This is a personal showcase and planning tool; shared team use would require a separate persistence and access design.
@@ -116,3 +116,10 @@ Start here → Optional tools and practice → Review the demo’s usability off
 ## A clearer first route
 
 Start here gives the seven-step guided journey precedence. Additional exercises, prioritisation and usability review sit inside Optional tools and practice. All workspace views remain directly available from the sidebar. Item editors show optional estimates and target dates in expandable planning details, and prerequisites in an expandable section with a live linked count. Estimates, dates and selected prerequisites remain part of the saved record when these sections are collapsed.
+
+## Return to the backlog
+
+Feedback, prioritisation and delivery views include an explicit Back to product backlog control. Work-item editors, feedback editors and work-link dialogs include the same return route. Following links from the backlog remembers search, priority, owner, Active/Completed scope and vertical scroll for the current workspace. Returning restores that view and focuses the originating item where it still exists. A different workspace starts with the unfiltered active backlog. Unsaved-form protection also applies to this navigation.
+
+### Mobile navigation
+At widths up to 850px, use the labelled Go to section selector to open any of the ten sections. It reflects the current view, including after following contextual links. Wider screens retain the sidebar buttons. Both controls use the same navigation handler and protect unfinished forms.
