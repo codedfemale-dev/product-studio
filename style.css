@@ -46,3 +46,14 @@
 #bulk-work-form input:not([type="checkbox"]),#bulk-work-form select,#saved-work-view-form input{font-size:16px;min-height:44px;width:100%;min-width:0}.work-tools>button,.saved-view-buttons button,.saved-view-row button,.work-visibility-notice button,.bulk-action{min-height:44px}
 .saved-work-views{min-width:0;width:100%}.saved-view-buttons{min-width:0}.saved-view-buttons button{max-width:100%;overflow-wrap:anywhere;white-space:normal;text-align:left}
 .personal-learning-link{margin-top:24px}.calendar-support-help{margin:14px 0 18px;padding-top:12px}.mobile-table-tip{display:none}@media(max-width:520px){.mobile-table-tip{display:block;font-size:11px;color:#435965;margin:0 0 12px}}.table-wrap:focus-visible{outline:3px solid #A47C40;outline-offset:4px}
+
+/* Overview filters: the same coastal slate finish as the primary action. */
+.focus-controls{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;padding:18px;background:linear-gradient(120deg,rgba(220,231,234,.65),rgba(248,250,250,.45));border:1px solid rgba(164,189,200,.6);border-radius:14px;margin:22px 0 14px}
+.focus-controls label{gap:9px;color:#435965;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.focus-controls select{appearance:none;-webkit-appearance:none;min-height:52px;padding:13px 46px 13px 17px;border:1px solid #233642;border-radius:9px;background-color:#345360;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='m6 8 4 4 4-4' fill='none' stroke='%23DFBF94' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"),linear-gradient(135deg,#3E606E,#2B4653);background-repeat:no-repeat;background-position:right 16px center,center;background-size:20px,auto;color:#F8FAFA;font-size:16px;line-height:1.5;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 3px 7px rgba(35,54,66,.12);cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.focus-controls select:hover{border-color:#C49A61;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 4px 10px rgba(35,54,66,.18)}
+.focus-controls select:focus-visible{outline:3px solid #8A6739;outline-offset:3px;border-color:#DFBF94}
+.focus-controls option{background:#F8FAFA;color:#233642}
+@media(max-width:520px){.focus-controls{grid-template-columns:1fr;padding:14px;gap:14px;border-radius:12px}.focus-controls select{padding-left:12px;padding-right:34px;background-position:right 11px center,center;background-size:16px,auto}}
+@media(prefers-reduced-motion:reduce){.focus-controls select{transition:none}}
+@media(forced-colors:active){.focus-controls select{appearance:auto;background-image:none;border:1px solid ButtonText;color:ButtonText;background-color:ButtonFace}}
