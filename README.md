@@ -199,3 +199,12 @@ A personal workspace without records now opens a compact setup screen instead of
 Calendar import keeps one-time-copy and data-handling information visible; supported-event details and resource limits are available in an expandable section. On phones, the file chooser is reachable without reading all optional detail first.
 
 The phone backlog shows a sideways-scroll cue. Its scrollable table is a labelled, keyboard-focusable region; left/right arrows use native browser scrolling. These are presentation/accessibility changes, with no storage-schema change.
+
+
+### Responsive backlog and simpler guidance
+
+At phone widths up to600px,the product backlog is presented as cards. Larger screens keep the table. Both presentations use the same records and controls:order,owner,priority,estimate,status,linked context and Sprint selection. Reordering changes the full active backlog order,including when filtered. Completed history has no ordering controls. Zero-point estimates remain visible as0.
+
+Empty states distinguish a new workspace,completed history,finished active work and results hidden by filters. A first empty backlog omits unused filtering controls. Empty Sprint boards link to backlog selection instead of repeating four empty columns. Feedback,calendar,roadmap and essentials provide a relevant next action.
+
+Long teaching callouts are retained under “Tips for this view”,with a brief reminder visible. Notices containing action buttons stay expanded. Existing “Why this view matters” context remains available.
